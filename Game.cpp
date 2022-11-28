@@ -76,7 +76,6 @@ void Game::Render() const
 	ball.Draw();
 
 	// TODO #3 - Update render to render all bricks
-	
 	for (int i = 0; i < 5; i++)
 	{
 		v[i].Draw();
@@ -87,7 +86,7 @@ void Game::Render() const
 void Game::CheckCollision()
 {
 	// TODO #4 - Update collision to check all bricks
-	if (brick.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
+	if (v.size()(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
 	{
 		brick.color = ConsoleColor(brick.color - 1);
 		ball.y_velocity *= -1;
@@ -101,8 +100,6 @@ void Game::CheckCollision()
 	// TODO #6 - If no bricks remain, pause ball and display victory text with R to reset
 	if (v.empty() == true)
 	{
-
-
 		ball.moving = false;
 		std::cout << "You Win! (Press 'R' to reset the game.)";
 	}
