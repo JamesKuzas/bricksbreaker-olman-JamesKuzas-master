@@ -96,7 +96,8 @@ void Game::CheckCollision()
 			
 			if (v[i].color == DarkMagenta)
 			{
-				v.erase(i);
+				v[i].color = Black;
+				v.erase(v.begin() + i);
 			}
 		}
 		
