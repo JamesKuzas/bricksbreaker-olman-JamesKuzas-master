@@ -88,7 +88,7 @@ void Game::CheckCollision()
 	// TODO #4 - Update collision to check all bricks
 	for (int i = 0; i < 5; i++)
 	{
-		if (v[i].visage()(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
+		if (v[i].Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
 		{
 			brick.color = ConsoleColor(brick.color - 1);
 			ball.y_velocity *= -1;
