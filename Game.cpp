@@ -27,35 +27,12 @@ void Game::Reset()
 	brick.doubleThick = true;
 	brick.color = ConsoleColor::DarkGreen;
 
-	brick2.width = 10;
-	brick2.height = 2;
-	brick2.x_position = 20;
-	brick2.y_position = 5;
-	brick2.doubleThick = true;
-	brick2.color = ConsoleColor::DarkGreen;
-
-	brick3.width = 10;
-	brick3.height = 2;
-	brick3.x_position = 35;
-	brick3.y_position = 5;
-	brick3.doubleThick = true;
-	brick3.color = ConsoleColor::DarkGreen;
-
-	brick4.width = 10;
-	brick4.height = 2;
-	brick4.x_position = 50;
-	brick4.y_position = 5;
-	brick4.doubleThick = true;
-	brick4.color = ConsoleColor::DarkGreen;
-
-	brick5.width = 10;
-	brick5.height = 2;
-	brick5.x_position = 65;
-	brick5.y_position = 5;
-	brick5.doubleThick = true;
-	brick5.color = ConsoleColor::DarkGreen;
-	
-
+	for (int i = 0; i < 5; i++)
+	{
+		v.push_back(brick);
+		brick.x_position = brick.x_position + 15;
+		
+	}
 }
 
 void Game::ResetBall()
@@ -99,11 +76,11 @@ void Game::Render() const
 	ball.Draw();
 
 	// TODO #3 - Update render to render all bricks
-	brick.Draw();
-	brick2.Draw();
-	brick3.Draw();
-	brick4.Draw();
-	brick5.Draw();
+	
+	for (int i = 0; i < 5; i++)
+	{
+		v[i].Draw();
+	}
 	Console::Lock(false);
 }
 
@@ -116,65 +93,16 @@ void Game::CheckCollision()
 		ball.y_velocity *= -1;
 
 		// TODO #5 - If the ball hits the same brick 3 times (color == black), remove it from the vector
-		if (brick.Contains(ball.x_position + ball.x_velocity,ball.y_position+ball.y_velocity))
-		{
-			brick.color = Black;
-			brick.height = 0;
-			brick.width = 0;
-		}
-	}
-
-	if (brick2.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
-	{
-		brick2.color = ConsoleColor(brick.color - 1);
-		ball.y_velocity *= -1;
-		if (brick2.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
-		{
-			brick2.color = Black;
-			brick2.height = 0;
-			brick2.width = 0;
-		}
-	}
-
-	if (brick3.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
-	{
-		brick3.color = ConsoleColor(brick.color - 1);
-		ball.y_velocity *= -1;
-		if (brick3.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
-		{
-			brick3.color = Black; 
-			brick3.height = 0;
-			brick3.width = 0;
-		}
-	}
-
-	if (brick4.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
-	{
-		brick4.color = ConsoleColor(brick.color - 1);
-		ball.y_velocity *= -1;
-		
-		brick4.color = Black;
-		brick4.height = 0;
-		brick4.width = 0;
 		
 	}
 
-	if (brick5.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
-	{
-		brick5.color = ConsoleColor(brick.color - 1);
-		ball.y_velocity *= -1;
-		if (brick5.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
-		{
-			brick5.color = Black;
-			brick5.visage = true;
-			brick5.height = 0;
-			brick5.width = 0;
-		}
-	}
+	
 
 	// TODO #6 - If no bricks remain, pause ball and display victory text with R to reset
-	if (v.size()==10)
+	if (v.empty() == true)
 	{
+
+
 		ball.moving = false;
 		std::cout << "You Win! (Press 'R' to reset the game.)";
 	}
