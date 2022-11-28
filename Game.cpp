@@ -25,7 +25,7 @@ void Game::Reset()
 	brick.x_position = 5;
 	brick.y_position = 5;
 	brick.doubleThick = true;
-	brick.color = ConsoleColor::DarkCyan;
+	brick.color = ConsoleColor::DarkGreen;
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -85,7 +85,7 @@ void Game::Render() const
 void Game::CheckCollision()
 {
 	// TODO #4 - Update collision to check all bricks
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < v.size(); i++)
 	{
 		if (v[i].Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
 		{
@@ -101,9 +101,6 @@ void Game::CheckCollision()
 			}
 		}
 	}
-	
-
-	
 
 	// TODO #6 - If no bricks remain, pause ball and display victory text with R to reset
 	if (v.empty() == true)
@@ -118,11 +115,10 @@ void Game::CheckCollision()
 	}
 
 	// TODO #7 - If ball touches bottom of window, pause ball and display defeat text with R to reset
-	if (ball.y_position - 5 > paddle.y_position)
+	if (ball.y_position == WINDOW_HEIGHT)
 	{
 		ball.moving = false;
-		
-		std::cout << "You Lost! (Press 'R' to reset the game.)";
+		std::cout << "You Lose! (Press 'R' to reset the game.)";
 	}
 	
 }
