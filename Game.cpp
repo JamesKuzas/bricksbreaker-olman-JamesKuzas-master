@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Game.h"
-
+#include <vector>
 Game::Game()
 {
 	Reset();
@@ -25,7 +25,7 @@ void Game::Reset()
 	brick.x_position = 5;
 	brick.y_position = 5;
 	brick.doubleThick = true;
-	brick.color = ConsoleColor::DarkGreen;
+	brick.color = ConsoleColor::DarkCyan;
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -75,7 +75,7 @@ void Game::Render() const
 	ball.Draw();
 
 	// TODO #3 - Update render to render all bricks
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < v.size(); i++)
 	{
 		v[i].Draw();
 	}
@@ -105,6 +105,7 @@ void Game::CheckCollision()
 	// TODO #6 - If no bricks remain, pause ball and display victory text with R to reset
 	if (v.empty() == true)
 	{
+		Render();
 		ball.moving = false;
 		std::cout << "You Win! (Press 'R' to reset the game.)";
 	}
@@ -117,6 +118,7 @@ void Game::CheckCollision()
 	// TODO #7 - If ball touches bottom of window, pause ball and display defeat text with R to reset
 	if (ball.y_position == WINDOW_HEIGHT)
 	{
+		Render();
 		ball.moving = false;
 		std::cout << "You Lose! (Press 'R' to reset the game.)";
 	}
