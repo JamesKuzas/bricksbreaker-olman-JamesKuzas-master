@@ -92,7 +92,6 @@ void Game::CheckCollision()
 			v[i].color = ConsoleColor(v[i].color - 1);
 			ball.y_velocity *= -1;
 			
-			
 			// TODO #5 - If the ball hits the same brick 3 times (color == black), remove it from the vector
 			
 			if (v[i].color == Black)
@@ -105,7 +104,6 @@ void Game::CheckCollision()
 	// TODO #6 - If no bricks remain, pause ball and display victory text with R to reset
 	if (v.empty() == true)
 	{
-		Render();
 		ball.moving = false;
 		std::cout << "You Win! (Press 'R' to reset the game.)";
 	}
@@ -118,7 +116,6 @@ void Game::CheckCollision()
 	// TODO #7 - If ball touches bottom of window, pause ball and display defeat text with R to reset
 	if (ball.y_position == WINDOW_HEIGHT)
 	{
-		Render();
 		ball.moving = false;
 		std::cout << "You Lose! (Press 'R' to reset the game.)";
 	}
